@@ -20,5 +20,19 @@ formDados.addEventListener('submit', (evt) => {
         tipoCombustivel: (form_dados.get('tipoCombustivel')),
     }
 
+    addVeiculo(veiculo)
+
+    formDados.reset()
+    
+
 
 })
+
+//ADICIONANDO VEICULOS NO ARRAY 
+const addVeiculo = (objVeiculo) =>{
+    veiculo.push(objVeiculo)
+
+    listPessoa()
+}
+
+//FUNCAO PARA QUE OS VEICULOS SEJAM LISTADOS 
