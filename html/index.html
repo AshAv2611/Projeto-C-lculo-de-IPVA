@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto Cálculo de IPVA</title>
-    
-    <script src="../js/script.js" defer></script>
+
+    <script src="../js/script.js" type="module" defer></script>
+    <link rel="stylesheet" href="../css/style.css">
+
 </head>
+
 <body>
     <div id="geral">
         <h3>Informe abaixo os dados do automóvel</h3>
 
         <form id="formulario">
-            <label for="modelo" >Qual o modelo do veículo?</label>
-            <input type="text" name="modelo" id="modelo">
+            <label for="modelo">Qual o modelo do veículo?</label>
+            <input type="text" name="modelo" id="modelo"><br>
 
-            <label for="marca" >Qual a marca?</label>
-            <input type="text" name="marca" id="marca">
+            <label for="marca">Qual a marca?</label>
+            <input type="text" name="marca" id="marca"><br>
 
-            <label for="placa" >Qual a placa?</label>
-            <input type="text" name="placa" id="placa">
+            <label for="placa">Qual a placa?</label>
+            <input type="text" name="placa" id="placa"><br>
 
-            <label for="ano" >Qual o ano de fabricação?</label>
-            <input type="text" name="ano" id="ano">
+            <label for="ano">Qual o ano de fabricação?</label>
+            <input type="text" name="ano" id="ano"><br>
 
-            <label for="valorMercado" > Qual o valor de mercado desse veículo?</label>
-            <input type="text" name="valorMercado" id="valorMercado">
+            <label for="valorMercado"> Qual o valor de mercado desse veículo?</label>
+            <input type="text" name="valorMercado" id="valorMercado"><br>
 
-            <label for="tipoCombustivel"> Qual o tipo de combustível ultizado?</label>
-            <input type="text" name="tipoCombustivel" id="tipoCombustivel">
+            <br><label>Qual o tipo de combustível utilizado?</label><br>
 
-            <button type="submit"> Enviar </button>
+            <input type="radio" name="tipoCombustivel" id="gasolina" value="gasolina">
+            <label for="gasolina">Gasolina</label><br>
 
+            <input type="radio" name="tipoCombustivel" id="etanol" value="etanol">
+            <label for="etanol">Etanol</label><br>
+
+            <input type="radio" name="tipoCombustivel" id="bicombustivel" value="bicombustivel">
+            <label for="bicombustivel">Bicombustíveis</label><br>
+
+            <input type="radio" name="tipoCombustivel" id="hibrido" value="hibrido">
+            <label for="hibrido">Híbridos</label><br>
+
+            <input type="radio" name="tipoCombustivel" id="eletrico" value="eletrico">
+            <label for="eletrico">Elétricos</label><br>
+
+            <br><button type="submit"> Enviar </button>
 
         </form>
 
@@ -40,4 +57,5 @@
         </div>
     </div>
 </body>
+
 </html>
