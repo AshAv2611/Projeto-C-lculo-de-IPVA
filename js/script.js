@@ -1,68 +1,68 @@
-// IMPORTANDO AS FUNÇÕES DO ARQUIVO DE CÁLCULO
-import { calcularSeguro, calcularIpva } from '../js/scriptCalculo.js';
+import { calcularIpva } from "./scriptCalculo.js"
+import { calcularSeguro } from "./scriptCalculo.js"
 
-//PEGANDO ELEMENTOS DO DOM
+
+
+//Chamando elementos do dom 
+//Como chamar elementos do dom em js?
 const formDados = document.querySelector('#formulario')
 const divInterface = document.querySelector('#Interface')
 
-//DECLARANDO UM ARRAY 
+//Criando o array
+//Como criar um array em js?
 const veiculo = []
 
-// CAPTURANDO O SUBMIT 
-formDados.addEventListener('submit', (evt) => {
+//Capturar os eventos inseridos no formulário pelo submit
+formDados.addEventListener('submit', (evt)=>{
+    // Interrompendo o reload da página 
     evt.preventDefault()
 
+    //Criando o objeto formulario
     const form_dados = new FormData(formDados)
-
-    // CAPTURANDO O RÁDIO SELECIONADO: Busca na tela o input do tipo radio que está marcado (:checked)
-    const radioMarcado = document.querySelector('input[type="radio"]:checked')
-
-    let objVeiculo = {
-        modelo: (form_dados.get('modelo')),
-        marca: (form_dados.get('marca')),
-        placa: (form_dados.get('placa')),
-        ano: Number(form_dados.get('ano')),
-        valorMercado: Number(form_dados.get('valorMercado')),
-        
-        // Se o usuário clicou em algum rádio, salvamos o ID dele ('gasolina', 'etanol', etc.)
-        // Se não clicou em nenhum, deixa vazio ''
-        tipoCombustivel: radioMarcado ? radioMarcado.id : ''
-    }
-    //CRIANDO CÁLCULO DO SEGURO
-    const seguro = calcularSeguro(objVeiculo.valorMercado);
-
-    //CRIANDO CÁLCULO DE IPVA
-    const dadosIpva = calcularIpva(objVeiculo.ano, objVeiculo.valorMercado, objVeiculo.tipoCombustivel);
-
-    // UNIFICANDO TUDO NO OBJETO FINAL QUE SERÁ ENVIADO
-    const veiculoFinal = {
-        ...objVeiculo, 
-        seguro: seguro, 
-        ipva: dadosIpva.ipva, 
-        isento: dadosIpva.isento
+    
+    //Criando o de veiculo
+    const veiculo = {
+        modelo : form_dados.get('modelo'),
+        marca : form_dados.get('marca'),
+        placa : form_dados.get('placa'),
+        ano : form_dados.get('ano'),
+        valorMercado : form_dados.get('valorMercado'),
+        tipoCombustivel : form_dados.get('tipoCombustivel'), 
     }
 
-    addVeiculo(veiculoFinal)
+    //Adicionar o objeto
+    addVeiculo(veiculo)
+    //Função listar veiculos
+    listVeiculos()
+    
 
+
+    //Limpando o formulário para que possa inserir novos dados
     formDados.reset()
+
 })
 
-//ADICIONANDO VEICULOS NO ARRAY 
-const addVeiculo = (objVeiculo) => {
-    veiculo.push(objVeiculo)
+    //Função para que possamos adicionar o obejto pessoa
+    const addVeiculo = (objVeiculo) =>{
+        //Adicionar um veiculo no array
+        veiculo.push(objVeiculo)
+    }
 
-    listVeiculo()
-}
+    //Criando função para listar os veículos 
+    const listVeiculos = () =>{
+        veiculo.forEach((element,i) => {
+            const ipva = calcularIpva(element)
+            const seguro = calcularSeguro(element)
 
-//FUNCAO PARA QUE OS VEICULOS SEJAM LISTADOS 
-const listVeiculo = () => {
-    divInterface.innerHTML = "" // Limpa a tela para não duplicar a lista a cada inserção
-    
-    veiculo.forEach((elem, i) => {
-        divInterface.innerHTML += `<div class= 'item-pessoa'>${i + 1} - ${elem.marca} ${elem.modelo} (${elem.ano}) | 
-        Placa: ${elem.placa} | 
-        Valor: R$ ${elem.valorMercado.toFixed(2).replace('.', ',')} | 
-        Seguro: R$ ${elem.seguro.toFixed(2).replace('.', ',')} | 
-        IPVA: ${elem.isento ? 'Isento' : `R$ ${elem.ipva.toFixed(2).replace('.', ',')}`}</div>`
-    })
-}
+            divInterface.innerHTML += `O carro ${element.modelo} está com ipva ${ipva} ,
+            ${element.marca}
+            ${element.placa}
+            ${element.ano}
+            ${element.valorMercado}
+            ${element.tipoCombustivel}
+            ${seguro} 
+            `
+        });
+
+    }
+

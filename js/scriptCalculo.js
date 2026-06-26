@@ -1,31 +1,30 @@
-// EXPORTANDO AS FUNÇÕES DE CÁLCULO
+const calcularSeguro = (objVeiculo) => {
+    let valorSeguro = ''
 
-export const calcularSeguro = (valorMercado) => {
-    return valorMercado * 0.10;
-};
+    valorSeguro = objVeiculo.valorMercado * 0.10
 
-export const calcularIpva = (ano, valorMercado, tipoCombustivel) => {
-    let ipva = 0;
-    let ehIsento = false;
-    const anoAtual = 2026;
-    const idadeVeiculo = anoAtual - ano;
+    return valorSeguro
+}
 
-    if (idadeVeiculo <= 20) {
-        // Agora o tipoCombustivel vai receber exatamente o "id" que veio lá do HTML
-        if (tipoCombustivel === 'gasolina') {
-            ipva = valorMercado * 0.20;
-        } else if (tipoCombustivel === 'etanol') {
-            ipva = valorMercado * 0.15;
-        } else if (tipoCombustivel === 'bicombustivel' || tipoCombustivel === 'bicombustíveis') {
-            ipva = valorMercado * 0.10;
-        } else if (tipoCombustivel === 'hibrido' || tipoCombustivel === 'híbridos') {
-            ipva = valorMercado * 0.08;
-        } else if (tipoCombustivel === 'eletrico' || tipoCombustivel === 'elétricos') {
-            ipva = valorMercado * 0.02;
-        }
-    } else {
-        ehIsento = true;
+const calcularIpva = (objVeiculo) => {
+    let ipva = ''
+    let idadeVeiculo = 2026 - objVeiculo.ano
+
+    if (idadeVeiculo > 20) {
+        ipva = 'Isento'
+    } else if (objVeiculo.tipoCombustivel === 'gasolina') {
+        ipva = 'R$' + objVeiculo.valorMercado * 0.20
+    }else if (objVeiculo.tipoCombustivel === 'etanol') {
+        ipva = 'R$' + objVeiculo.valorMercado * 0.15
+    }else if (objVeiculo.tipoCombustivel === 'biocombustivel') {
+        ipva = 'R$' + objVeiculo.valorMercado * 0.10
+    }else if (objVeiculo.tipoCombustivel === 'hibrido') {
+        ipva = 'R$' + objVeiculo.valorMercado * 0.08
+    }else {
+        ipva = 'R$' + objVeiculo.valorMercado * 0.02
     }
 
-    return { ipva: ipva, isento: ehIsento };
-};
+    return ipva
+}
+
+export{calcularIpva,calcularSeguro}
